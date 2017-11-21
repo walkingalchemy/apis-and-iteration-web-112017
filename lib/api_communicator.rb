@@ -9,7 +9,8 @@ def get_character_movies_from_api(character)
   if get_character_data(character)
     get_films_data(get_films_urls(character))
   else
-    puts "That character does not exist."
+    puts "That character does not exist. Try one of these:"
+    full_character_list.each {|char| puts char}
   end
   # iterate over the character hash to find the collection of `films` for the given
   #   `character`
@@ -33,6 +34,22 @@ def get_character_data(character)
   end
 end
 
+def get_results
+  all_characters = RestClient.get('http://www.swapi.co/api/people/')
+  character_hash = JSON.parse(all_characters)
+  characters_data = character_hash["results"]
+end
+
+def full_character_list
+  get_results.map {|character| character["name"]}
+end
+
+# all_characters = RestClient.get('http://www.swapi.co/api/people/')
+# character_hash = JSON.parse(all_characters)
+# x = get_results
+# y = full_character_list
+#
+# binding.pry
 def get_films_urls(character)
   get_character_data(character)["films"]
 end

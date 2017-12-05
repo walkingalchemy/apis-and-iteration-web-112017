@@ -1,8 +1,10 @@
 def welcome
-  # puts out a welcome message here!
+  puts "Weclome to find Star Wars "
 end
 
 def get_character_from_user
   puts "please enter a character"
-  # use gets to capture the user's input. This method should return that input, downcased.
+  puts "please choose from (name only):"
+  show_all_characters
+  gets.chomp# use gets to capture the user's input. This method should return that input, downcased.
 end
